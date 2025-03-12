@@ -53,11 +53,15 @@
   show-list-of-tables: true,
   show-code-snippets: true,
   show-abstract: true,
+  show-summary: true,
+  show-preface: true,
   numbering-alignment: center,
   toc-depth: 3,
   acronym-spacing: 5em,
   glossary-spacing: 1.5em,
   abstract: none,
+  summary: none,
+  preface: none,
   appendix: none,
   acronyms: none,
   glossary: none,
@@ -100,14 +104,18 @@
     show-list-of-tables,
     show-code-snippets,
     show-abstract,
+    show-summary,
+    show-preface,
     header,
     numbering-alignment,
     toc-depth,
     acronym-spacing,
     glossary-spacing,
     abstract,
+    summary,
     appendix,
     acronyms,
+    preface,
     university,
     university-location,
     supervisor,
@@ -141,7 +149,7 @@
   }
 
   // save heading and body font families in variables
-  let body-font = "Open Sans"
+  let body-font = "Arial"
   let heading-font = "Montserrat"
 
   // customize look of figure
@@ -175,8 +183,8 @@
   }
 
   show heading.where(level: 1): it => {
-    pagebreak()
-    v(2em) + it + v(1em)
+    // pagebreak()
+    v(1.5em) + it + v(0.5em)
   }
   show heading.where(level: 2): it => v(1em) + it + v(0.5em)
   show heading.where(level: 3): it => v(0.5em) + it + v(0.25em)
@@ -312,6 +320,11 @@
     ],
   )
 
+  set page(margin: (
+    y: 2.5cm,
+    x: 2.0cm,
+  ))
+
   // set page numbering for preface
   let preface-numbering = "I"
   if ("preface" in page-numbering) {
@@ -368,6 +381,7 @@
     )
   }
 
+
   show outline.entry.where(level: 1): it => {
     v(18pt, weak: true)
     strong(it)
@@ -375,14 +389,24 @@
 
   set par(justify: true, leading: 1em)
 
+  if (show-summary and summary != none) {
+  pagebreak()
+    align(center + horizon, heading(level: 1, numbering: none, outlined: false)[Zusammenfassung])
+    text(summary)
+  }
+
   if (show-abstract and abstract != none) {
+    pagebreak()
     align(center + horizon, heading(level: 1, numbering: none, outlined: false)[Abstract])
     text(abstract)
   }
 
+
+
   set par(leading: 0.65em)
 
   if (show-table-of-contents) {
+    pagebreak()
     outline(
       title: TABLE_OF_CONTENTS.at(language),
       indent: auto,
@@ -395,6 +419,7 @@
     let count = elems.len()
 
     if (show-list-of-figures and count > 0) {
+    pagebreak()
       outline(
         title: LIST_OF_FIGURES.at(language),
         target: figure.where(kind: image),
@@ -403,6 +428,7 @@
   }
 
   context {
+  pagebreak()
     let elems = query(figure.where(kind: table))
     let count = elems.len()
 
@@ -427,11 +453,19 @@
   }
 
   if (show-acronyms and acronyms != none and acronyms.len() > 0) {
+    pagebreak()
     print-acronyms(language, acronym-spacing)
   }
 
   if (glossary != none and glossary.len() > 0) {
+    pagebreak()
     print-glossary(language, glossary-spacing)
+  }
+
+  if (show-preface and preface != none) {
+    pagebreak()
+    align(center + horizon, heading(level: 1, numbering: none, outlined: false)[Vorwort])
+    text(preface)
   }
 
   [#metadata(none)<numbering-preface-end>]
@@ -504,7 +538,20 @@
   }
 
   if (appendix != none) {
-    heading(level: 1, numbering: none)[#APPENDIX.at(language)]
+    set pagebreak(
+      weak: true,
+      to: none,
+    )
+    set heading(
+      numbering: (n) => "Anhang " + str(n),
+      supplement: none,
+
+    )
+    show heading.where(level: 1): it => {
+      pagebreak(weak: true)
+      it
+    }
+    counter(heading).update(0)
     appendix
   }
 
