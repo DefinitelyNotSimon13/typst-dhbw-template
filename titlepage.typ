@@ -11,6 +11,8 @@
   many-authors,
   right-logo-height,
   supervisor,
+  appraiser,
+  timespan,
   title,
   type-of-degree,
   type-of-thesis,
@@ -207,6 +209,10 @@
     row-gutter: 11pt,
     column-gutter: 2.5em,
 
+    // timespan
+    text(weight: "semibold", TITLEPAGE_TIMESPAN.at(language)),
+    text(timespan),
+
     // students
     text(weight: "semibold", TITLEPAGE_STUDENT_ID.at(language)),
     stack(
@@ -292,6 +298,16 @@
     },
     if ("university" in supervisor and type(supervisor.university) == str) {
       text(supervisor.university)
+    },
+
+    // university appraiser
+    if("university" in appraiser)  {
+      text(weight: "semibold", TITLEPAGE_APPRAISER.at(language))
+    },
+
+    if ("university" in appraiser and type(appraiser.university) == str) {
+      text(appraiser.university)
     }
+
   )
 }

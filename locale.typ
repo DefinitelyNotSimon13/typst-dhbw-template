@@ -23,14 +23,26 @@
   "en": "Company:",
 )
 
+
 #let TITLEPAGE_COMPANY_SUPERVISOR = (
   "de": "Betreuer im Unternehmen:",
   "en": "Supervisor in the Company:",
 )
 
+
 #let TITLEPAGE_SUPERVISOR = (
   "de": "Betreuer an der ",
   "en": "Supervisor at ",
+)
+
+#let TITLEPAGE_TIMESPAN = (
+  "de": "Bearbeitungszeitraum:",
+  "en": "Timespan (TBC)"
+)
+
+#let TITLEPAGE_APPRAISER = (
+  "de": "Gutachter der dualen Hochschule:",
+  "en": "Appraiser (TBC):",
 )
 
 #let DECLARATION_OF_AUTHORSHIP_TITLE = (

@@ -29,6 +29,8 @@
   university,
   university-location,
   supervisor,
+  appraiser,
+  timespan,
   date,
   city,
   bibliography,
