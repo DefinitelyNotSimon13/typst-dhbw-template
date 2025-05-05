@@ -187,7 +187,6 @@
   }
 
   show heading.where(level: 1): it => {
-    // pagebreak()
     v(1.5em) + it + v(0.5em)
   }
   show heading.where(level: 2): it => v(1em) + it + v(0.5em)
@@ -328,7 +327,7 @@
 
   set page(margin: (
     y: 2.5cm,
-    x: 2.0cm,
+    x: 2.5cm,
   ))
 
   // set page numbering for preface
@@ -476,8 +475,8 @@
 
   [#metadata(none)<numbering-preface-end>]
 
-  set par(leading: 1em, spacing: 2em)
-  set block(spacing: 2em)
+  set par(leading: 1em, spacing: 1.5em)
+  set block(spacing: 1.5em)
 
   // reset page numbering and set to main page numbering
   let main-numbering = "1 / 1"
@@ -503,6 +502,12 @@
       )
     },
   )
+  
+  show heading.where(level: 1): it => {
+    pagebreak()
+    v(1.5em) + it + v(0.5em)
+  }
+
   counter(page).update(1)
 
   body
