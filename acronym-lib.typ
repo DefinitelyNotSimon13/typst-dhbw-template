@@ -28,7 +28,7 @@
 
     if is-in-dict("acronyms", acros, acr) {
       let defs = acronyms.at(acr)
-      if type(defs) == "string" {
+      if type(defs) == str {
         if plural {
           display("acronyms", acros, acr, defs + "s", link: link)
         } else {
