@@ -37,7 +37,7 @@
 
 #let TITLEPAGE_TIMESPAN = (
   "de": "Bearbeitungszeitraum:",
-  "en": "Timespan (TBC)"
+  "en": "Timespan (TBC)",
 )
 
 #let TITLEPAGE_APPRAISER = (
@@ -127,6 +127,11 @@ The content of this thesis may not be made available, either in its entirety or 
 #let LIST_OF_TABLES = (
   "de": "Tabellenverzeichnis",
   "en": "List of Tables",
+)
+
+#let LIST_OF_FORMULAS = (
+  "de": "Formelverzeichnis",
+  "en": "List of Formulas",
 )
 
 #let CODE_SNIPPETS = (

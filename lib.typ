@@ -51,6 +51,7 @@
   show-acronyms: true,
   show-list-of-figures: true,
   show-list-of-tables: true,
+  show-list-of-formulas: true,
   show-code-snippets: true,
   show-abstract: true,
   show-summary: true,
@@ -104,6 +105,7 @@
     show-acronyms,
     show-list-of-figures,
     show-list-of-tables,
+    show-list-of-formulas,
     show-code-snippets,
     show-abstract,
     show-summary,
@@ -325,10 +327,12 @@
     ],
   )
 
-  set page(margin: (
-    y: 2.5cm,
-    x: 2.5cm,
-  ))
+  set page(
+    margin: (
+      y: 2.5cm,
+      x: 2.5cm,
+    ),
+  )
 
   // set page numbering for preface
   let preface-numbering = "I"
@@ -395,7 +399,7 @@
   set par(justify: true, leading: 1em)
 
   if (show-summary and summary != none) {
-  pagebreak()
+    pagebreak()
     align(center + horizon, heading(level: 1, numbering: none, outlined: false)[Zusammenfassung])
     text(summary)
   }
@@ -405,7 +409,6 @@
     align(center + horizon, heading(level: 1, numbering: none, outlined: false)[Abstract])
     text(abstract)
   }
-
 
 
   set par(leading: 0.65em)
@@ -424,7 +427,7 @@
     let count = elems.len()
 
     if (show-list-of-figures and count > 0) {
-    pagebreak()
+      pagebreak()
       outline(
         title: LIST_OF_FIGURES.at(language),
         target: figure.where(kind: image),
@@ -433,7 +436,20 @@
   }
 
   context {
-  pagebreak()
+    let elems = query(figure.where(kind: "formula"))
+    let count = elems.len()
+
+    if (show-list-of-formulas and count > 0) {
+      pagebreak()
+      outline(
+        title: LIST_OF_FORMULAS.at(language),
+        target: figure.where(kind: "formula"),
+      )
+    }
+  }
+
+  context {
+    pagebreak()
     let elems = query(figure.where(kind: table))
     let count = elems.len()
 
@@ -502,7 +518,7 @@
       )
     },
   )
-  
+
   show heading.where(level: 1): it => {
     pagebreak()
     v(1.5em) + it + v(0.5em)
@@ -554,9 +570,8 @@
       to: none,
     )
     set heading(
-      numbering: (n) => "Anhang " + str(n),
+      numbering: n => "Anhang " + str(n),
       supplement: none,
-
     )
     show heading.where(level: 1): it => {
       pagebreak(weak: true)
@@ -567,4 +582,13 @@
   }
 
   [#metadata(none)<numbering-appendix-end>]
+}
+
+#let formula(content, capt: str) = {
+  return figure(
+    content,
+    caption: capt,
+    kind: "formula",
+    supplement: "Formel"
+  )
 }

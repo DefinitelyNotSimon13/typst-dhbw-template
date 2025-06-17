@@ -12,6 +12,7 @@
   show-acronyms,
   show-list-of-figures,
   show-list-of-tables,
+  show-list-of-formulas,
   show-code-snippets,
   show-abstract,
   show-summary,
@@ -60,6 +61,7 @@
     show-declaration-of-authorship: show-declaration-of-authorship,
     show-list-of-figures: show-list-of-figures,
     show-list-of-tables: show-list-of-tables,
+    show-list-of-formulas: show-list-of-formulas,
     show-code-snippets: show-code-snippets,
     show-abstract: show-abstract,
   )
