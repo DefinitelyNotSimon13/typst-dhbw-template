@@ -305,18 +305,18 @@
                   }
                 ]
               },
-              stack(
-                dir: ltr,
-                spacing: 1em,
-                if (show-header-left-logo and logo-left != none) {
-                  set image(height: left-logo-height / 2)
-                  logo-left
-                },
-                if (show-header-right-logo and logo-right != none) {
-                  set image(height: right-logo-height / 2)
-                  logo-right
-                },
-              ),
+              // stack(
+              //   dir: ltr,
+              //   spacing: 1em,
+              //   if (show-header-left-logo and logo-left != none) {
+              //     set image(height: left-logo-height / 2)
+              //     logo-left
+              //   },
+              //   if (show-header-right-logo and logo-right != none) {
+              //     set image(height: right-logo-height / 2)
+              //     logo-right
+              //   },
+              // ),
             )
             if (show-header-divider) {
               line(length: 100%)
