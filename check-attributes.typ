@@ -249,14 +249,6 @@
     panic("Bibliography is invalid. Specify a bibliography in the 'bibliography' attribute of the template.")
   }
 
-  if (
-    type(supervisor) != dictionary or (
-      "company" not in supervisor or supervisor.company == none or supervisor.company == ""
-    ) and ("university" not in supervisor or supervisor.university == none or supervisor.university == "")
-  ) {
-    panic("Supervisor(s) is/are invalid. Specify a supervisor either for the company and/or the university in the 'supervisor' attribute of the template.")
-  }
-
   let string-array-attributes = (
     ignored-link-label-keys-for-highlighting: ignored-link-label-keys-for-highlighting,
   )
