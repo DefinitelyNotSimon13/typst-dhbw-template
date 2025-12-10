@@ -1,7 +1,7 @@
 #import "@preview/codelst:2.0.2": *
-#import "acronym-lib.typ": init-acronyms, print-acronyms, acr, acrpl, acrs, acrspl, acrl, acrlpl, acrf, acrfpl
-#import "glossary-lib.typ": init-glossary, print-glossary, gls
-#import "locale.typ": TABLE_OF_CONTENTS, LIST_OF_FIGURES, LIST_OF_TABLES, CODE_SNIPPETS, APPENDIX, REFERENCES
+#import "acronym-lib.typ": acr, acrf, acrfpl, acrl, acrlpl, acrpl, acrs, acrspl, init-acronyms, print-acronyms
+#import "glossary-lib.typ": gls, init-glossary, print-glossary
+#import "locale.typ": APPENDIX, CODE_SNIPPETS, LIST_OF_FIGURES, LIST_OF_TABLES, REFERENCES, TABLE_OF_CONTENTS
 #import "titlepage.typ": *
 #import "confidentiality-statement.typ": *
 #import "declaration-of-authorship.typ": *
@@ -155,7 +155,7 @@
   }
 
   // save heading and body font families in variables
-  let body-font = "Arial"
+  let body-font = ""
   let heading-font = "Montserrat"
 
   // customize look of figure
@@ -589,6 +589,6 @@
     content,
     caption: capt,
     kind: "formula",
-    supplement: "Formel"
+    supplement: "Formel",
   )
 }
