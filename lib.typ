@@ -49,6 +49,7 @@
   show-declaration-of-authorship: true,
   show-table-of-contents: true,
   show-acronyms: true,
+  show-glossary: true,
   show-list-of-figures: true,
   show-list-of-tables: true,
   show-list-of-formulas: true,
@@ -155,7 +156,7 @@
   }
 
   // save heading and body font families in variables
-  let body-font = ""
+  let body-font = "Carlito"
   let heading-font = "Montserrat"
 
   // customize look of figure
@@ -329,8 +330,8 @@
 
   set page(
     margin: (
-      y: 2.5cm,
-      x: 2.5cm,
+      y: 2.1cm,
+      x: 2.1cm,
     ),
   )
 
@@ -478,7 +479,7 @@
     print-acronyms(language, acronym-spacing)
   }
 
-  if (glossary != none and glossary.len() > 0) {
+  if (show-glossary and glossary != none and glossary.len() > 0) {
     pagebreak()
     print-glossary(language, glossary-spacing)
   }
