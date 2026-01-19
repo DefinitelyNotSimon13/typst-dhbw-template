@@ -28,7 +28,7 @@
 
     if is-in-dict("acronyms", acros, acr) {
       let defs = acronyms.at(acr)
-      if type(defs) == str {
+      if type(defs) == str or type(defs) == content{
         if plural {
           display("acronyms", acros, acr, defs + "s", link: link)
         } else {
@@ -50,7 +50,7 @@
           display("acronyms", acros, acr, defs.at(0), link: link)
         }
       } else {
-        panic("Definitions should be arrays of one or two strings. Definition of " + acr + " is: " + type(defs))
+        panic("Definitions should be arrays of one or two strings. Definition of " + repr(acr) + " is: " + repr(type(defs)))
       }
     }
   }
