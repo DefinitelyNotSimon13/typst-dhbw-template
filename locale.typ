@@ -37,7 +37,7 @@
 
 #let TITLEPAGE_TIMESPAN = (
   "de": "Bearbeitungszeitraum:",
-  "en": "Timespan (TBC)",
+  "en": "Working Period:",
 )
 
 #let TITLEPAGE_APPRAISER = (
