@@ -261,79 +261,74 @@
     true
   }
 
-  set page(
-    margin: (top: 8em, bottom: 8em),
-    header: [
-      #set block(spacing: 0.75em)
-      #context {
-        if (display-header) {
-          if (header-content != none) {
-            header.content
-          } else {
-            grid(
-              columns: (1fr, auto),
-              align: (left, right),
-              gutter: 2em,
-              if (show-header-chapter) {
-                align(left + bottom)[
-                  #let headings = query(heading.where(level: 1))
-                  #if headings.len() > 0 and not headings.any(it => (it.location().page() == here().page())) {
-                    let elems = query(selector(heading.where(level: 1)).before(here()))
+  set page(margin: (top: 8em, bottom: 8em), header: [
+    #set block(spacing: 0.75em)
+    #context {
+      if (display-header) {
+        if (header-content != none) {
+          header.content
+        } else {
+          grid(
+            columns: (1fr, auto),
+            align: (left, right),
+            gutter: 2em,
+            if (show-header-chapter) {
+              align(left + bottom)[
+                #let headings = query(heading.where(level: 1))
+                #if headings.len() > 0 and not headings.any(it => (it.location().page() == here().page())) {
+                  let elems = query(selector(heading.where(level: 1)).before(here()))
 
-                    if (elems.len() > 0) {
-                      let current-heading = elems.last()
-                      let heading-counter = if current-heading.numbering == none {
-                        none
-                      } else {
-                        counter(heading).get().first()
-                      }
-
-                      [#heading-counter #current-heading.body]
+                  if (elems.len() > 0) {
+                    let current-heading = elems.last()
+                    let heading-counter = if current-heading.numbering == none {
+                      none
+                    } else {
+                      counter(heading).get().first()
                     }
-                  } else {
-                    let elems = query(selector(heading.where(level: 1)).after(here()))
 
-                    if (elems.len() > 0) {
-                      let current-heading = elems.first()
-                      let heading-counter = if current-heading.numbering == none {
-                        none
-                      } else {
-                        counter(heading).get().first() + 1
-                      }
-
-                      [#heading-counter #current-heading.body]
-                    }
+                    [#heading-counter #current-heading.body]
                   }
-                ]
-              },
-              // stack(
-              //   dir: ltr,
-              //   spacing: 1em,
-              //   if (show-header-left-logo and logo-left != none) {
-              //     set image(height: left-logo-height / 2)
-              //     logo-left
-              //   },
-              //   if (show-header-right-logo and logo-right != none) {
-              //     set image(height: right-logo-height / 2)
-              //     logo-right
-              //   },
-              // ),
-            )
-            if (show-header-divider) {
-              line(length: 100%)
-            }
+                } else {
+                  let elems = query(selector(heading.where(level: 1)).after(here()))
+
+                  if (elems.len() > 0) {
+                    let current-heading = elems.first()
+                    let heading-counter = if current-heading.numbering == none {
+                      none
+                    } else {
+                      counter(heading).get().first() + 1
+                    }
+
+                    [#heading-counter #current-heading.body]
+                  }
+                }
+              ]
+            },
+            // stack(
+            //   dir: ltr,
+            //   spacing: 1em,
+            //   if (show-header-left-logo and logo-left != none) {
+            //     set image(height: left-logo-height / 2)
+            //     logo-left
+            //   },
+            //   if (show-header-right-logo and logo-right != none) {
+            //     set image(height: right-logo-height / 2)
+            //     logo-right
+            //   },
+            // ),
+          )
+          if (show-header-divider) {
+            line(length: 100%)
           }
         }
       }
-    ],
-  )
+    }
+  ])
 
-  set page(
-    margin: (
-      y: 2.1cm,
-      x: 2.1cm,
-    ),
-  )
+  set page(margin: (
+    y: 2.1cm,
+    x: 2.1cm,
+  ))
 
   // set page numbering for preface
   let preface-numbering = "I"
@@ -347,16 +342,9 @@
     footer: context {
       let display-total-page-number = preface-numbering.clusters().filter(c => c in page-numbering-symbols).len() >= 2
 
-      align(
-        numbering-alignment,
-        numbering(
-          preface-numbering,
-          ..counter(page).get(),
-          ..if display-total-page-number {
-            counter(page).at(<numbering-preface-end>)
-          },
-        ),
-      )
+      align(numbering-alignment, numbering(preface-numbering, ..counter(page).get(), ..if display-total-page-number {
+        counter(page).at(<numbering-preface-end>)
+      }))
     },
   )
   counter(page).update(1)
@@ -429,10 +417,7 @@
 
     if (show-list-of-figures and count > 0) {
       pagebreak()
-      outline(
-        title: LIST_OF_FIGURES.at(language),
-        target: figure.where(kind: image),
-      )
+      outline(title: LIST_OF_FIGURES.at(language), target: figure.where(kind: image))
     }
   }
 
@@ -442,10 +427,7 @@
 
     if (show-list-of-formulas and count > 0) {
       pagebreak()
-      outline(
-        title: LIST_OF_FORMULAS.at(language),
-        target: figure.where(kind: "formula"),
-      )
+      outline(title: LIST_OF_FORMULAS.at(language), target: figure.where(kind: "formula"))
     }
   }
 
@@ -455,10 +437,7 @@
     let count = elems.len()
 
     if (show-list-of-tables and count > 0) {
-      outline(
-        title: LIST_OF_TABLES.at(language),
-        target: figure.where(kind: table),
-      )
+      outline(title: LIST_OF_TABLES.at(language), target: figure.where(kind: table))
     }
   }
 
@@ -467,10 +446,7 @@
     let count = elems.len()
 
     if (show-code-snippets and count > 0) {
-      outline(
-        title: CODE_SNIPPETS.at(language),
-        target: figure.where(kind: raw),
-      )
+      outline(title: CODE_SNIPPETS.at(language), target: figure.where(kind: raw))
     }
   }
 
@@ -507,16 +483,9 @@
     footer: context {
       let display-total-page-number = main-numbering.clusters().filter(c => c in page-numbering-symbols).len() >= 2
 
-      align(
-        numbering-alignment,
-        numbering(
-          main-numbering,
-          ..counter(page).get(),
-          ..if display-total-page-number {
-            counter(page).at(<numbering-main-end>)
-          },
-        ),
-      )
+      align(numbering-alignment, numbering(main-numbering, ..counter(page).get(), ..if display-total-page-number {
+        counter(page).at(<numbering-main-end>)
+      }))
     },
   )
 
@@ -542,16 +511,9 @@
     footer: context {
       let display-total-page-number = appendix-numbering.clusters().filter(c => c in page-numbering-symbols).len() >= 2
 
-      align(
-        numbering-alignment,
-        numbering(
-          appendix-numbering,
-          ..counter(page).get(),
-          ..if display-total-page-number {
-            counter(page).at(<numbering-appendix-end>)
-          },
-        ),
-      )
+      align(numbering-alignment, numbering(appendix-numbering, ..counter(page).get(), ..if display-total-page-number {
+        counter(page).at(<numbering-appendix-end>)
+      }))
     },
   )
   counter(page).update(1)
@@ -570,8 +532,17 @@
       weak: true,
       to: none,
     )
+
     set heading(
-      numbering: n => "Anhang " + str(n),
+      numbering: (..nums) => {
+        let nums_array = nums.pos()
+        if (nums_array.len() == 1) {
+          APPENDIX.at(language) + " " + numbering("A", ..nums)
+        } else {
+          let new_nums = nums_array.slice(1)
+          numbering("1.1.1.1", ..new_nums)
+        }
+      },
       supplement: none,
     )
     show heading.where(level: 1): it => {
