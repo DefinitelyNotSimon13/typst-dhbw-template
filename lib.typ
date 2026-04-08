@@ -411,6 +411,8 @@
     )
   }
 
+  show figure.where(kind: raw): set figure(supplement: [Codeausschnit])
+
   context {
     let elems = query(figure.where(kind: image))
     let count = elems.len()
