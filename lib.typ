@@ -326,8 +326,8 @@
   ])
 
   set page(margin: (
-    y: 2.1cm,
-    x: 2.1cm,
+    y: 2.5cm,
+    x: 2.5cm,
   ))
 
   // set page numbering for preface
@@ -379,7 +379,6 @@
     )
   }
 
-
   show outline.entry.where(level: 1): it => {
     v(18pt, weak: true)
     strong(it)
@@ -398,7 +397,6 @@
     align(center + horizon, heading(level: 1, numbering: none, outlined: false)[Abstract])
     text(abstract)
   }
-
 
   set par(leading: 0.65em)
 
