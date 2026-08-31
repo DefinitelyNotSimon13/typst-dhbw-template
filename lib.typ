@@ -6,6 +6,7 @@
 #import "confidentiality-statement.typ": *
 #import "declaration-of-authorship.typ": *
 #import "check-attributes.typ": *
+#import "utils.typ": *
 
 // Workaround for the lack of an `std` scope.
 #let std-bibliography = bibliography
